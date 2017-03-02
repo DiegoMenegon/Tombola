@@ -3,6 +3,10 @@ import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -10,13 +14,16 @@ import javax.swing.JOptionPane;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+
+import tombola.Cartella;
+
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
 
-public class ServerGrafico {
+public class ServerGrafico extends Thread{
 
 	protected Shell shell;
 	private Table table;
@@ -33,6 +40,32 @@ public class ServerGrafico {
 		try {
 			ServerGrafico window = new ServerGrafico();
 			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void Runnable(){
+		try {
+			// Crei un server di connessione
+			ServerSocket ss = new ServerSocket(9999);
+			while (true) {
+				// riceva una connessione
+				Socket s = ss.accept();
+				// riceva del testo
+				InputStreamReader isr = new InputStreamReader(s.getInputStream());
+				BufferedReader in = new BufferedReader(isr);
+				
+				// Invio i numeri
+				// TODO Auto-generated method stub
+				Cartella c = new Cartella();
+				// L'elenco dei numeri da dare al client
+				int numeri[] = c.getNumeri();
+				for (int i : numeri) {
+					System.out.print(i + " ");
+					s.getOutputStream().write(i);
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

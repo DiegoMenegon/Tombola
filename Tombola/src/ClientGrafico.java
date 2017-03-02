@@ -88,7 +88,7 @@ public class ClientGrafico {
 		tblclmnNewColumn_8.setWidth(50);
 		
 		try {
-			Socket s = new Socket("172.16.6.4", 9080);
+			Socket s = new Socket("localhost", 9080);
 
 					} catch (UnknownHostException e) {
 						// TODO Auto-generated catch block
