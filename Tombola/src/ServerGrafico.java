@@ -45,7 +45,7 @@ public class ServerGrafico extends Thread{
 		}
 	}
 	
-	public void Runnable(){
+	public void run(){
 		try {
 			// Crei un server di connessione
 			ServerSocket ss = new ServerSocket(9999);
@@ -90,6 +90,7 @@ public class ServerGrafico extends Thread{
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
+		ServerGrafico.this.start();
 		shell = new Shell();
 		shell.setSize(450, 310);
 		shell.setText("SWT Application");
