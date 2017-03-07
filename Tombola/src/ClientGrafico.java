@@ -2,6 +2,7 @@ import java.awt.Button;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -10,6 +11,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.custom.TableCursor;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -18,6 +20,7 @@ public class ClientGrafico {
 
 	protected Shell shell;
 	private Table table;
+	ArrayList<Integer> vett = new ArrayList<>();
 
 	/**
 	 * Launch the application.
@@ -109,13 +112,19 @@ public class ClientGrafico {
  				try {
  					Socket s = new Socket("localhost", 9999);
  					for (int i = 0; i < 15; i++) {
- 						System.out.print(s.getInputStream().read() + " ");
- 					}
+ 						//System.out.print(s.getInputStream().read() + " ");
+ 						vett.add(s.getInputStream().read());
+ 					}System.out.println(vett);
  				} catch (IOException e1) {
  					// TODO Auto-generated catch block
  					e1.printStackTrace();
  				}
  
+ 				for(int i=0;i<3;i++){
+					TableItem item=table.getItem(i);
+					item.setText(i, vett.get(i)+"");
+				}
+ 				
   				// Riceve i 15 numeri
  				// Apre il thread di comunicazione che riceverà i comandi successivi
  				// Apre il thread di comunicazione che riceverà i comandi
