@@ -29,6 +29,8 @@ public class Cartella {
 		segnati = new boolean[15]; //default tutti false
 		inizializzaCartella();
 	}
+	
+	String output="";
 
 	// Restituisce la vincita più alta presente in questa cartella
 	public Vincita vincitaMax() {
@@ -131,10 +133,9 @@ public class Cartella {
 	}
 	
 	// Rappresentazione testuale
-	public void stampa() {
-		final String spacer = "   ";
-		for (int r=0; r<3; r++) {
-			String output = "";
+	public String stampa(int r) {
+		final String spacer = "-";
+			output = "";
 			int d = 0;
 			for (int c=0; c<5; c++) {
 				int index = r*5+c;
@@ -150,10 +151,9 @@ public class Cartella {
 
 				// stampa numero
 				output += String.format("%s%02d%c", spacer, num, (segnati[index]?'#':' '));
-			}
-
-			Utility.info(output);
 		}
+		System.out.println(output);
+		return output;
 	}
 
 	/**

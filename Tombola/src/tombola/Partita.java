@@ -69,7 +69,7 @@ public class Partita {
 						// il giocatore ha vinto, aggiungi alla lista dei vincitori per dividere il premio
 						vincitori.add(g);
 						Utility.info("La cartella di "+g.getNome()+" vince: "+v.name());
-						c.stampa();
+					//	c.stampa();
 					}
 				}
 			}

@@ -35,7 +35,7 @@ public class Giocatore {
 	public void nuovaCartella() { // da chiamare ad ogni inizio di partita
 		cart = new Cartella();
 		Utility.info("Nuova cartella per "+getNome());
-		cart.stampa();
+		//cart.stampa();
 	}
 	public Cartella getCartella() {
 		return cart;

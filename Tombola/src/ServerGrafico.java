@@ -4,7 +4,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -30,7 +32,9 @@ public class ServerGrafico extends Thread{
 	int n=1;
 	int nc;
 	ArrayList<Integer> estratti=new ArrayList<>();
+	ArrayList<String> rigatab=new ArrayList<>();
 	Display display;
+	Socket s;
 
 	/**
 	 * Launch the application.
@@ -45,16 +49,18 @@ public class ServerGrafico extends Thread{
 		}
 	}
 	
+	
 	public void run(){
 		try {
 			// Crei un server di connessione
 			ServerSocket ss = new ServerSocket(9999);
 			while (true) {
 				// riceva una connessione
-				Socket s = ss.accept();
+				s = ss.accept();
 				// riceva del testo
 				InputStreamReader isr = new InputStreamReader(s.getInputStream());
 				BufferedReader in = new BufferedReader(isr);
+				PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 				
 				// Invio i numeri
 				// TODO Auto-generated method stub
@@ -62,9 +68,15 @@ public class ServerGrafico extends Thread{
 				// L'elenco dei numeri da dare al client
 				int numeri[] = c.getNumeri();
 				for (int i : numeri) {
-					System.out.print(i + " ");
+					//System.out.print(i + " ");
 					s.getOutputStream().write(i);
 				}
+				for(int x=0;x<3;x++){
+					//System.out.print("_"+c.stampa(x));
+					out.println(c.stampa(x));
+				}
+				
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -157,8 +169,13 @@ public class ServerGrafico extends Thread{
 					int nc=(int)((Math.random()*90)+1);
 					if(!estratti.contains(nc)){
 						lblNumeroEstratto.setText(""+nc);
+						try {
+							s.getOutputStream().write(nc);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						estratti.add(nc);
-						System.out.println(table.getItems().length);
 						for(int i=0;i<9;i++){
 							TableItem item=table.getItem(i);
 							for(int j=0;j<10;j++){
