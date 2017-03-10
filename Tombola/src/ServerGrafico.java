@@ -167,6 +167,7 @@ public class ServerGrafico extends Thread{
 						break;
 					}
 					int nc=(int)((Math.random()*90)+1);
+					
 					if(!estratti.contains(nc)){
 						lblNumeroEstratto.setText(""+nc);
 						try {
@@ -205,7 +206,12 @@ public class ServerGrafico extends Thread{
 		for(int i=0;i<9;i++){
 			 TableItem tableItem= new TableItem(table, SWT.NONE);
 			 for(int j=0;j<10;j++){
-				 tableItem.setText(j,""+n); 
+				 if(i==0&&j<9){
+					tableItem.setText(j,"0"+n); 
+				 }else{
+					tableItem.setText(j,""+n);
+				 }
+				 
 				 n++;
 			 }
 		}
