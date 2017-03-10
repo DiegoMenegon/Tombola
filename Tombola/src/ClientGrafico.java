@@ -6,6 +6,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Composite;
@@ -27,11 +29,13 @@ public class ClientGrafico extends Thread {
 	Label nestratto;
 	ArrayList<Integer> vett = new ArrayList<>();
 	String[] rigatab = new String[3];
+	int[] vincite = new int[3];
 	InputStreamReader isr;
 	BufferedReader in;
 	Socket s;
 	Display display;
 	Color yellow;
+	int comb=0;
 
 	
 	
@@ -73,6 +77,26 @@ public class ClientGrafico extends Thread {
 									if(Integer.parseInt(item.getText(j))==numestratto){
 										System.out.println("Numero!");
 										item.setBackground(j, yellow);
+										vincite[i]++;
+										if(vincite[i]==2&&comb==0){
+											JOptionPane.showMessageDialog(null,"AMBO!","Avviso",JOptionPane.PLAIN_MESSAGE);
+											comb++;
+										}
+										if(vincite[i]==3&&comb==1){
+											JOptionPane.showMessageDialog(null,"TERZINA!","Avviso",JOptionPane.PLAIN_MESSAGE);
+											comb++;
+										}
+										if(vincite[i]==4&&comb==2){
+											JOptionPane.showMessageDialog(null,"QUATERNA!","Avviso",JOptionPane.PLAIN_MESSAGE);
+											comb++;
+										}
+										if(vincite[i]==5&&comb==3){
+											JOptionPane.showMessageDialog(null,"CINQUINA!","Avviso",JOptionPane.PLAIN_MESSAGE);
+											comb++;
+										}
+										if(vincite[0]==5&&vincite[1]==5&&vincite[2]==5){
+											JOptionPane.showMessageDialog(null,"TOMBOLA!","Avviso",JOptionPane.PLAIN_MESSAGE);
+										}
 									}
 								}catch(Exception e){
 									
