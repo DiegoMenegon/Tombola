@@ -206,13 +206,8 @@ public class ServerGrafico extends Thread{
 		for(int i=0;i<9;i++){
 			 TableItem tableItem= new TableItem(table, SWT.NONE);
 			 for(int j=0;j<10;j++){
-				 if(i==0&&j<9){
-					tableItem.setText(j,"0"+n); 
-				 }else{
-					tableItem.setText(j,""+n);
-				 }
-				 
-				 n++;
+				tableItem.setText(j,""+n);
+				n++;
 			 }
 		}
 

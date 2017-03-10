@@ -62,19 +62,22 @@ public class ClientGrafico extends Thread {
 
 		while (true) {
 			try {
-				int nestratto=s.getInputStream().read();
+				int numestratto=s.getInputStream().read();
 				Display.getDefault().asyncExec(new Runnable() {
 				    public void run() {
-				       ClientGrafico.this.nestratto.setText(nestratto+"");
+				       ClientGrafico.this.nestratto.setText(numestratto+"");
 				       for(int i=0;i<3;i++){
-				    	   System.out.println("Ciao");
 							TableItem item=table.getItem(i);
 							for(int j=0;j<10;j++){
-								 System.out.println("Cella:" + item.getText(j)+"f");
-								if(item.getText(j).equals(nestratto)){
-									//item.setBackground(j, yellow);
-									item.setText(j, "x");
+								try{
+									if(Integer.parseInt(item.getText(j))==numestratto){
+										System.out.println("Numero!");
+										item.setBackground(j, yellow);
+									}
+								}catch(Exception e){
+									
 								}
+								
 							}
 						}
 				    }
@@ -115,7 +118,7 @@ public class ClientGrafico extends Thread {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
-		Color yellow= display.getSystemColor(SWT.COLOR_YELLOW);
+		yellow= display.getSystemColor(SWT.COLOR_YELLOW);
 		
 		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE);
 		tblclmnNewColumn.setWidth(50);
@@ -180,7 +183,7 @@ public class ClientGrafico extends Thread {
 					for (int j = 0; j < 3; j++) {
 						rigatab = in.readLine().split("-");
 						for(int t=0;t<rigatab.length;t++){
-							rigatab[t].replaceAll(" ","");
+							rigatab[t]=rigatab[t].trim();
 						}
 						System.out.println("lunghezza" + rigatab.length);
 						for (int x = 0; x < rigatab.length - 1; x++) {
