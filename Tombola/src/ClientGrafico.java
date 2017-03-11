@@ -83,7 +83,7 @@ public class ClientGrafico extends Thread {
 											comb++;
 										}
 										if(vincite[i]==3&&comb==1){
-											JOptionPane.showMessageDialog(null,"TERZINA!","Avviso",JOptionPane.PLAIN_MESSAGE);
+											JOptionPane.showMessageDialog(null,"TERNA!","Avviso",JOptionPane.PLAIN_MESSAGE);
 											comb++;
 										}
 										if(vincite[i]==4&&comb==2){
